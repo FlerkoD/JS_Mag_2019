@@ -1,0 +1,51 @@
+<html>
+
+<head>
+    <title>DOM: Task 1</title>
+    <style type="text/css">
+        div {
+            border: 1px solid rgb(0, 4, 255);
+            margin: 20px 5 5 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <button onClick="choseDivsViaSelector()">Select via QuerySelector</button>
+    <button onClick="choseDivsViaTags()">Select via .getElementsByTagName()</button>
+
+    <div>
+        <p>Lonely Div</p>
+    </div>
+
+    <div>
+        <div>
+            <p>First inner Div</p>
+        </div>
+        <div>
+            <p>Second Div</p>
+        </div>
+    </div>
+
+    <div>
+        <p>Another lonely Div</p>
+    </div>
+
+    <script type="text/javascript">
+        function choseDivsViaSelector() {
+            for (let elem of document.querySelectorAll('div div')) {
+                elem.style.borderColor = 'green';
+            }
+        }
+
+        function choseDivsViaTags() {
+            for (let elem of document.getElementsByTagName('div')) {
+                if (elem.parentElement.tagName == 'DIV') {
+                    elem.style.borderColor = 'red';
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

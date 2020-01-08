@@ -1,0 +1,162 @@
+<html>
+
+<head>
+	<title>Objects</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<link rel="stylesheet" href="css/js-console.css" type="text/css" />
+	<!--<script src="js/js-console.js" type="text/javascript"></script>-->
+
+</head>
+
+<body>
+	<div>
+		<text id="task1_txt1">Property:</text>
+		<input id="task1_str1" value="name"></input>
+		<text id="task1_txt2">// name, age, height, weight</text>
+		<p>
+			<button id="task1" onClick="task1()">Execute</button>
+		</p>
+
+	</div>
+
+	<div>
+		<text id="task2_txt1">Task 2</text>
+		<button id="task2" onClick="task2()">Execute</button>
+	</div>
+	<div>
+		<text id="task3_txt1">Task 3</text>
+		<button id="task3" onClick="task3()">Execute</button>
+	</div>
+
+
+	<div id="js-console"></div>
+	<!--<div><button id = "clear" onClick="clearConsole()">Clear console</button></div>-->
+	<script src="js/js-console.js"></script>
+	<script type="text/javascript">
+		function clearConsole() {
+			document.getElementById('js-console').innerHTML = "";
+			document.getElementById('js-console').innerHTML = "<p></p>";
+		}
+
+		/*
+			TASK 1
+			Напишите функцию, которая проверяет, содержит ли данный объект данное свойство.
+		*/
+		function task1() {
+			jsConsole.writeLine("TASK 1");	
+			let input = document.getElementById("task1_str1").value;
+
+			let user = {
+				name: "John",
+				age: 30,
+				height: 181,
+				weight: 65
+			};
+
+			let hasProp = hasProperty(user, input);
+
+			function hasProperty(object, property) {
+				return property in object;
+			}
+
+			jsConsole.writeLine(hasProp);
+		}
+
+		/*	
+			TASK 2
+			Напишите функцию, которая найдет самого молодого человека в заданном массиве лиц 
+			и выведет его / ее полное имя. 
+			У каждого человека есть свойства `firstName`, `lastName` and `age`
+		*/
+		function task2() {
+			jsConsole.writeLine("TASK 2");	
+
+			let persons = [
+				{ firstName: "Totoro", lastName: "Forest Spirit", age: 100 },
+				{ firstName: "Mei", lastName: "Kusakabe", age: 4 },
+				{ firstName: "Satsuki", lastName: "Kusakabe", age: 9 }
+			];
+
+			function findYoungestPerson(array) {
+				let person = array[0];
+				let age = person.age;
+				for (let p of array) {
+					if (p.age < age) {
+						age = p.age;
+						person = p;
+					}
+				}
+				return person;
+			};
+
+			let youngestPerson = findYoungestPerson(persons);
+
+			jsConsole.writeLine("The youngest person is:");
+			jsConsole.writeLine(youngestPerson.firstName + " " + youngestPerson.lastName + " - " + youngestPerson.age);
+		}
+
+		/*	
+			TASK 3
+			Напишите функцию, которая группирует массив лиц по возрасту, имени или фамилии.
+			Функция должна возвращать ассоциативный массив с ключами – группами,
+			а значения-массивами с лицами в этих груп-пах. 
+			Используйте функцию перегрузки (т. е. только одну функцию).
+		*/
+		function task3() {
+			jsConsole.writeLine("TASK 3");	
+
+			let persons = [
+				{ firstname: "Natalya", lastname: "Osipenko", age: 61 },
+				{ firstname: "Kristina", lastname: "Osipenko", age: 23 },
+				{ firstname: "Artem", lastname: "Korhov", age: 25 },
+				{ firstname: "Artem", lastname: "Seredinskiy", age: 20 },
+				{ firstname: "Artem", lastname: "Artsiomenka", age: 20 },
+				{ firstname: "Sergey", lastname: "Osipenko", age: 20 },
+				{ firstname: "Vinni", lastname: "Puh", age: 15 }
+			];
+
+			let groupedByAge = groupPeople(persons, "age");
+			let groupedByLastName = groupPeople(persons, "lastname");
+			let groupedByFirstName = groupPeople(persons, "firstname");
+
+			function groupPeople(array, property) {
+				let associatedMap = new Map();
+				let key, value, localValue;
+
+				for (let p of array) {
+					key = p[property];
+
+					if (associatedMap.has(key)) {
+						value = associatedMap.get(key);
+					} else {
+						value = [];
+					}
+
+					value.push(formatPerson(p, property));
+
+					associatedMap.set(key, value);
+				}
+
+				associatedMap.forEach((value, key, map) => {
+					jsConsole.writeLine(`${key}: ${value}`);
+				});
+			};
+
+			function formatPerson(person, mainProperty) {
+				let result = new Array();
+
+				for (key in person) {
+					if (key === mainProperty) continue;
+					result.push(person[key]);
+				}
+
+				return JSON.stringify(result);
+			}
+		}
+
+	</script>
+	<!--Здесь располагается разметка-->
+
+</body>
+
+</html>

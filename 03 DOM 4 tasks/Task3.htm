@@ -1,0 +1,20 @@
+<html>
+
+<head>
+    <title>DOM: Task 3</title>
+</head>
+
+<body>
+    <div>
+        <input type="color">
+        <button onClick="changeBodyColor()">Change Background Color</button>
+    </div>
+
+    <script type="text/javascript">
+        function changeBodyColor() {
+            document.body.style.background = document.querySelector('input[type="color"]').value;
+        }
+    </script>
+</body>
+
+</html>

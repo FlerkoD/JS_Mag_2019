@@ -1,0 +1,372 @@
+<html>
+	<head>
+		<title>String</title>	
+		<link rel="stylesheet" href="css/style.css" type="text/css"/>
+		<link rel="stylesheet" href="css/js-console.css" type="text/css"/>
+		<!--<script src="js/js-console.js" type="text/javascript"></script>-->
+		
+	</head>
+	<body>
+		<div>
+			<button id = "task1" onClick="task1()">Task 1</button>
+			<text id = "task1_txt1" hidden="true">str1:</text>
+			<input id = "task1_str1" hidden="true" value="1024"></input>
+			<button id = "task1Ex" onClick="task1Ex()" hidden="true">Execute</button>
+		</div>
+		<div>
+			<button id = "task2" onClick="task2()">Task 2</button>
+			<text id = "task2_txt1" hidden="true">str1:</text>
+			<input id = "task2_str1" hidden="true" value = ") (a + b))"></input>
+			<button id = "task2Ex" onClick="task2Ex()" hidden="true">Execute</button>
+		</div>
+		<div>
+			<button id = "task3" onClick="task3()">Task 3</button>
+			<text id = "task3_txt1" hidden="true">Text</text>
+			<textarea id = "task3_txtarea1" hidden="true">We are liv<b>in</b>g **in** an yellow submar<b>in</b>e. We don't have anyth<b>in</b>g else. **In**side the submar<b>in</b>e is very tight. So we are dr<b>in</b>k<b>in</b>g all the day. We will move out of it **in** 5 days.
+</textarea>
+			<text id = "task3_txt2" hidden="true">Word</text>
+			<input id = "task3_str1" hidden="true" value="in"></input>
+			<button id = "task3Ex" onClick="task3Ex()" hidden="true">Execute</button>
+		</div>		
+		<div>
+			<button id = "task4" onClick="task4()">Task 4</button>
+			<text id = "task4_txt1" hidden="true">Text</text>
+			<input id = "task4_str1" hidden="true" value = "Мы <mixcase>живем</mixcase> в <upcase>желтой подводной лодке</upcase>. У <mixcase>нас</mixcase> больше нет <lowcase>Ничего</lowcase>."></input>
+			<button id = "task4Ex" onClick="task4Ex()" hidden="true">Execute</button>
+		</div>
+		<div>
+			<button id = "task5" onClick="task5()">Task 5</button>
+			<text id = "task5_txt1" hidden="true">Text</text>
+			<input id = "task5_str1" hidden="true" value="Hello world!"></input>
+			<button id = "task5Ex" onClick="task5Ex()" hidden="true">Execute</button>
+		</div>
+		<div>
+			<button id = "task6" onClick="task6()">Task 6</button>
+			<text id = "task6_txt1" hidden="true">HTML text</text>
+			<input id = "task6_str1" hidden="true" value = "<innerTag>Some Text<text>text text text <divo>div DIV</divo></text></innerTag>"></input>
+			<button id = "task6Ex" onClick="task6Ex()" hidden="true">Execute</button>
+		</div>
+		<div>
+			<button id = "task7" onClick="task7()">Task 7</button>
+			<text id = "task7_txt1" hidden="true">URL</text>
+			<input id = "task7_str1" hidden="true" value = "http://www.devbg.org/forum/index.php"></input>
+			<button id = "task7Ex" onClick="task7Ex()" hidden="true">Execute</button>
+		</div>
+		
+		<div id="js-console"></div>
+		<!--<div><button id = "clear" onClick="clearConsole()">Clear console</button></div>-->
+		<script src="js/js-console.js"></script>
+		<script  type="text/javascript">
+			function clearConsole(){ 
+				document.getElementById('js-console').innerHTML = "";
+				document.getElementById('js-console').innerHTML = "<p></p>";
+			}
+			
+			function isAN(value) {
+			  if(value instanceof Number)
+				value = value.valueOf(); // Если это объект числа, то берём значение, которое и будет числом		  
+			return  isFinite(value) && value === parseInt(value, 10);
+			}
+		
+			/*
+				TASK 1
+				Написать JavaScript функцию,  которая переворачивает строку и возвращает ее.
+				* Пример:" "sample"  "elpmas".
+			*/
+			function reverse1(str){
+				return str.split("").reverse().join("");
+			}
+			
+			function reverse2(str){
+				let newStr = '', i;
+				for (let i = str.length - 1; i >= 0; i--) {
+					newStr += str.charAt(i);
+				}
+				return newStr;		
+			}
+			
+			function task1(){
+				jsConsole.writeLine("TASK 1");			
+				document.getElementById('task1_str1').hidden = false;
+				document.getElementById('task1Ex').hidden = false;
+				document.getElementById('task1_txt1').hidden = false;
+			}
+			
+			function task1Ex(){
+				let str = document.getElementById('task1_str1').value;
+				jsConsole.writeLine("input string " + str);
+				jsConsole.writeLine("reverse 1 " + reverse1(str));
+				jsConsole.writeLine("reverse 2 " + reverse2(str));
+			}		
+			
+			/*	
+				TASK 2
+				Напишите JavaScript функцию, чтобы проверить, правильно ли помещены скобки в заданном выражении.
+					* Пример правильного выражения: '((a + b) / 5-d)'.
+					* Пример неправильного выражения:') (a + b))'.
+			*/
+			function checkBrackets(str){
+				 /*if ( typeof str != "string" ) {
+					throw new Error( "'brackets' is not a string" );
+				 }
+				 if ( str.length % 2 ) {
+					throw new Error( "'brackets' length is not even" );
+				 }*/
+
+				let s1 = "(";
+				let s2 = ")";
+			}
+			
+			
+			function balance(a) {
+				for (let d = /(\u005B|\u0028|\u007B)[^\u005B\u0028\u007B]*?$/,
+				 e = {
+					"(": /\u0028[^\u007D\u005D]*?\u0029/,
+					"[": /\u005B[^\u0029\u007D]*?\u005D/,
+					"{": /\u007B[^\u0029\u005D]*?\u007D/
+				}, b, c = !0; c;) b = a, a = a.replace(d, function (a, b) {
+					return a.replace(e[b], "")
+				}), b == a && (c = !1);
+				return !/[\u005B\u005D\u0028\u0029\u007B\u007D]/.test(a)
+			};
+
+
+			
+			function task2(){	
+				jsConsole.writeLine("TASK 2");	
+				document.getElementById('task2_str1').hidden = false;
+				document.getElementById('task2Ex').hidden = false;
+				document.getElementById('task2_txt1').hidden = false;
+			}
+			
+			function task2Ex(){
+				let str = document.getElementById('task2_str1').value;
+				if (str == ""){ 
+					jsConsole.writeLine("str1 is null");
+					document.getElementById("task2_str1").focus();
+					return;
+				}
+				jsConsole.writeLine("Input string");
+				jsConsole.writeLine(str);
+				jsConsole.writeLine(balance(str));
+			}
+			
+			/*	
+				TASK 3
+				Написать JavaScript функцию, которая считает, сколько раз подстрока содержится в заданном тексте (выполнить поиск без учета регистра).
+				**Пример**: целевая подстрока **"in"**. 
+				Текст таков: We are liv<b>in</b>g **in** an yellow submar<b>in</b>e. We don't have anyth<b>in</b>g else. **In**side the submar<b>in</b>e is very tight. So we are dr<b>in</b>k<b>in</b>g all the day. We will move out of it **in** 5 days.
+				Результат: 9.
+			*/
+			function task3(){	
+				jsConsole.writeLine("TASK 3");	
+				document.getElementById('task3_str1').hidden = false;
+				document.getElementById('task3Ex').hidden = false;
+				document.getElementById('task3_txt1').hidden = false;
+				document.getElementById('task3_txt2').hidden = false;
+				document.getElementById('task3_txtarea1').hidden = false;
+			}
+			
+			function task3Ex(){
+				let word = document.getElementById('task3_str1').value;
+				let text = document.getElementById('task3_txtarea1').value;
+				if (word == "") {jsConsole.writeLine("Word is null"); document.getElementById("task3_str1").focus(); return;}
+				if (text == "") {jsConsole.writeLine("Text is null"); document.getElementById("task3_txtarea1").focus(); return;}
+				
+				jsConsole.writeLine("text: " + text);
+				
+				let newText = text.toUpperCase();
+				let index = 0;
+				let count = 0;
+				while (index != -1){
+					index = newText.indexOf(word.toUpperCase());
+					//jsConsole.writeLine("index " + index);
+					if (index != -1){
+						count++;
+						index = index + word.length;
+						newText = newText.substr(index);
+					}
+				}
+				jsConsole.writeLine("The word '" + word + "' is repeated " + count + " times");			
+			}
+			
+			/*
+				TASK 4
+				Дан текст. Напишите функцию, которая изменяет текст во всех областях:
+					* `<upcase>text</upcase>` в верхний регистр.
+					* `<lowcase>text</lowcase>` в нижний регистр. 
+					* `<mixcase>text</mixcase>` to mix casing (случайный)
+				**Пример**: `мы <mixcase>проживающего</mixcase> в <прочесть>желтая подводная лодка</прочесть>. Мы <mixcase>не</mixcase> у <Нижнем>ничего</Нижнем> другое.`
+				Ожидаемый результат: "Мы живем в желтой подводной лодке. У нас больше нет ничего.`
+				Регионы могут быть вложенными.
+			*/
+			function task4(){	
+				jsConsole.writeLine("TASK 4");	
+				document.getElementById('task4_str1').hidden = false;
+				document.getElementById('task4Ex').hidden = false;
+				document.getElementById('task4_txt1').hidden = false;
+			}
+			
+			function task4Ex(){
+				let text = document.getElementById('task4_str1').value;
+				if (text == "") {jsConsole.writeLine("Text is null"); document.getElementById("task4_str1").focus(); return;}
+				
+				jsConsole.writeLine("text: " + text);
+				
+				let upcase = document.getElementsByTagName('upcase');
+				let lowcase = document.getElementsByTagName('lowcase');
+				let mixcase = document.getElementsByTagName('mixcase');
+				//jsConsole.writeLine(a.length);
+				//jsConsole.writeLine(a[0].value);
+				//jsConsole.writeLine(document.getElementsByTagName('upcase')[0].innerHTML);
+				//document.getElementsByTagName('upcase')[0].style.color = 'red';
+				//jsConsole.writeLine(a.item(0));
+				for (let i = 0; i< upcase.length; i++) {
+					//jsConsole.writeLine(a[i].innerHTML);
+					upcase[i].style.color = 'yellow';
+					upcase[i].style.textTransform = 'uppercase';
+				}
+				
+				for (i = 0; i< lowcase.length; i++) {
+					lowcase[i].style.textTransform = 'lowercase';
+				}
+				
+				let random;
+				
+				for (i = 0; i < mixcase.length; i++){
+					random = Math.round(Math.random());
+					if (random == 0) {mixcase[i].style.textTransform = 'uppercase';}
+					else {mixcase[i].style.textTransform = 'lowercase';}
+				}
+				
+			}
+			
+			/*
+				TASK 5
+				Write a function that replaces non breaking white-spaces in a text with &nbsp.
+			*/
+			function task5(){	
+				jsConsole.writeLine("TASK 5");	
+				document.getElementById('task5_str1').hidden = false;
+				document.getElementById('task5Ex').hidden = false;
+				document.getElementById('task5_txt1').hidden = false;
+			}
+			
+			function task5Ex(){
+				let text = document.getElementById('task5_str1').value;
+				if (text == "") {jsConsole.writeLine("Text is null"); document.getElementById("task5_str1").focus(); return;}
+				jsConsole.writeLine("text: " + text);
+				text = text.replace(/ /g, '\u00a0');
+				//$1$2&nbsp;
+				///\&nbsp\;/gi
+				jsConsole.writeLine("text: " + text);
+			}
+			
+			/*
+				TASK 6
+				Напишите функцию, которая извлекает содержимое HTML-страницы в виде текста. Функция должна возвращать все, что находится в теге, без тегов:
+					```язык
+					<язык>
+						<глава>
+							<title>образец сайта</название>
+						</глава>
+						<тело>
+							<div>text<div>больше текста < /div>и больше...</div>в теле
+						</тело>
+					</язык>
+					``
+				Результат: образец sitetextmore textand более...в теле`
+			*/
+			
+			function task6(){	
+				jsConsole.writeLine("TASK 6");	
+				document.getElementById('task6_str1').hidden = false;
+				document.getElementById('task6Ex').hidden = false;
+				document.getElementById('task6_txt1').hidden = false;
+			}
+			
+			function task6Ex(){
+				let HTMLtext = document.getElementById('task6_str1');
+				if (HTMLtext == "") {jsConsole.writeLine("HTMLtext is null"); document.getElementById("task6_str1").focus(); return;}
+									
+				jsConsole.writeLine("Inner HTML");
+				jsConsole.writeLine(HTMLtext.value);
+				//HTMLtext = "<htmltag>"+HTMLtext+"</htmltag>";
+				
+				//jsConsole.writeLine(document.getElementById('task6_str1').getElementsByTagName('innerTag')[0].innerHTML);
+				let newText = HTMLtext.getElementsByTagName('innertag');
+				jsConsole.writeLine(newText);
+				jsConsole.writeLine(newText[0].value);
+			}
+			
+			/*
+				TASK 7
+				Написать скрипт, который разбирает URL-адрес вводится в формате: `[прото-кол]://[сервера]/[ресурс] и извлекает из него `[протокол]`, `[сервер]` и `[ресурс] элемен-тов. Возвращает элементы в объекте JSON.
+					Например, URL-адрес `http://www.devbg.org/forum/index.php` следующая информация должна быть извлечена:
+					
+					"JS
+					{
+						протокол: "Протокол http",
+						сервер: "www.devbg.org",
+						ресурс: "/форум/индекс.филиппинское песо"
+					}
+					``
+			*/
+		
+			function parse_url( url ) {
+				let parts = url.split( "#" ), out = {};
+				out.url = url;
+				out.hash = ( parts.length > 1 ? ( ( url = parts.shift() ) || 1 ) && parts.join( "#" ) : "" );
+				url = ( parts = url.split( "?" ) ).shift();
+				out.search = parts.join( "?" );
+				out.scheme = ( parts = url.split( "://" ) ) && parts.length > 1 ? parts.shift() : "";
+				out.host = ( ( parts = parts.join( "://" ).split( "/" ) ) && parts.length > 1 &&
+								parts[0].indexOf(".") > 0 || out.scheme ) && parts.shift() || "";
+				out.script = parts.pop();
+				out.path = ( parts.length > 0 ? "/" : "" ) + parts.join( "/" );
+				
+				return out;
+			}
+
+			
+			function task7(){	
+				jsConsole.writeLine("TASK 7");	
+				document.getElementById('task7_str1').hidden = false;
+				document.getElementById('task7Ex').hidden = false;
+				document.getElementById('task7_txt1').hidden = false;
+			}
+			
+			function task7Ex(){
+				let url = document.getElementById('task7_str1').value;
+				if (url == "") {jsConsole.writeLine("URL is null"); document.getElementById("task7_str1").focus(); return;}
+				
+				jsConsole.writeLine("url: " + url);
+				
+				///let regex = "/^[^\/]*:\/\/[^\/]*.[^\/]*\/$/";
+				//jsConsole.writeLine("regex: " + regex);
+				
+				let parse = parse_url(url);
+				jsConsole.writeLine("протокол: " + parse.scheme);
+				jsConsole.writeLine("сервер: " + parse.host);
+				jsConsole.writeLine("ресурс: " + parse.path + parse.script + parse.search + parse.hash);
+				
+				/*if (regex.test(text)){
+					jsConsole.writeLine("ok");
+				} else {jsConsole.writeLine("ne ok");}
+				/*
+				let a = text.split(',');
+				jsConsole.writeLine("The input sequence is");
+				for (let i = 0; i < a.length; i++) {
+				  jsConsole.write(a[i]+" ");
+				}
+				
+				let index = firstBiggestElementThanNeighbors(a);
+				jsConsole.writeLine("index " + index);
+				*/
+			}
+		</script>
+		<!--Здесь располагается разметка-->
+		
+	</body>
+</html>
+

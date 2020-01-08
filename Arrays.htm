@@ -1,0 +1,314 @@
+<html>
+	<head>
+		<title>Arrays</title>	
+		<link rel="stylesheet" href="css/style.css" type="text/css"/>
+		<link rel="stylesheet" href="css/js-console.css" type="text/css"/>
+		<!--<script src="js/js-console.js" type="text/javascript"></script>-->
+		
+	</head>
+	<body>
+		<button id = "task1" onClick="task1()">Task 1</button>
+		<div>
+			<button id = "task2" onClick="task2()">Task 2</button>
+			<text id = "task2_txt1" hidden="true">str1:</text>
+			<input id = "task2_str1" hidden="true" value="aaab"></input>
+			
+			<text id = "task2_txt2" hidden="true">str2:</text>
+			<input id = "task2_str2" hidden="true" value="aaabab"></input>
+			<button id = "task2Ex" onClick="task2Ex()" hidden="true">Execute</button>
+		</div>
+		<div>
+			<button id = "task3" onClick="task3()">Task 3</button>
+			<text id = "task3_txt1" hidden="true">Sequence [,]</text>
+			<input id = "task3_str1" hidden="true" value="2,1,1,2,3,3,2,2,2,1"></input>
+			<button id = "task3Ex" onClick="task3Ex()" hidden="true">Execute</button>
+		</div>		
+		<div>
+			<button id = "task4" onClick="task4()">Task 4</button>
+			<text id = "task4_txt1" hidden="true">Sequence [,]</text>
+			<input id = "task4_str1" hidden="true" value="3,2,3,4,2,2,4"></input>
+			<button id = "task4Ex" onClick="task4Ex()" hidden="true">Execute</button>
+		</div>
+		<div>
+			<button id = "task5" onClick="task5()">Task 5</button>
+			<text id = "task5_txt1" hidden="true">Sequence [,]</text>
+			<input id = "task5_str1" hidden="true" value="1,5,8,95,42,35,12,2,-2,1"></input>
+			<button id = "task5Ex" onClick="task5Ex()" hidden="true">Execute</button>
+		</div>
+		<div>
+			<button id = "task6" onClick="task6()">Task 6</button>
+			<text id = "task6_txt1" hidden="true">Sequence [,]</text>
+			<input id = "task6_str1" hidden="true" value="4,1,1,4,2,3,4,4,1,2,4,9,3"></input>
+			<button id = "task6Ex" onClick="task6Ex()" hidden="true">Execute</button>
+		</div>
+		
+		<div id="js-console"></div>
+		<!--<div><button id = "clear" onClick="clearConsole()">Clear console</button></div>-->
+		<script src="js/js-console.js"></script>
+		<script  type="text/javascript">
+			function clearConsole(){ 
+				document.getElementById('js-console').innerHTML = "";
+				document.getElementById('js-console').innerHTML = "<p></p>";
+			}
+		
+			/*
+				TASK 1
+				Написать скрипт, который выделяет массив из 20 целых чисел и инициализирует каждый элемент по его индексу, умноженному на 5.
+				Выведите полученный массив на консоль.
+			*/
+			function task1(){
+				jsConsole.writeLine("TASK 1");	
+				let a = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+				//jsConsole.writeLine("<div>length = " + a.length+"\n</div>");		
+				for (let i = 0; i < a.length; i++){
+					//document.write("<div>a["+i+"] = " + a[i]+";</div>\n");
+					jsConsole.writeLine(a.indexOf(i+1)*5)
+				}       			
+			}		
+			
+			/*	
+				TASK 2
+				Напишите скрипт, который сравнивает два char массива лексикографически (буква за буквой).
+			*/
+			function task2(){	
+				jsConsole.writeLine("TASK 2");	
+				document.getElementById('task2_str1').hidden = false;
+				document.getElementById('task2_str2').hidden = false;
+				document.getElementById('task2Ex').hidden = false;
+				document.getElementById('task2_txt1').hidden = false;
+				document.getElementById('task2_txt2').hidden = false;
+			}
+			
+			function task2Ex(){
+				let a = [document.getElementById("task2_str1").value,document.getElementById("task2_str2").value];
+				
+				if (a[0] == "") {
+					jsConsole.writeLine("str1 is null");
+					document.getElementById("task2_str1").focus();
+					return;
+				}
+				if (a[1] == "") {
+					jsConsole.writeLine("str2 is null");
+					document.getElementById("task2_str2").focus();
+					return;
+				}
+				jsConsole.writeLine(a);
+				if (a[0]==a[1] == true) {jsConsole.writeLine("str1 = str2"); return;}
+				if (a[0]>a[1] == true){jsConsole.writeLine("str1 > str2"); return;}
+				if (a[0]>a[1] == false) {jsConsole.writeLine("str1 < str2"); return;}		
+			}
+			
+			/*	
+				TASK 3
+				Напишите скрипт, который найдет максимальную последовательность равных элементов в массиве.
+				Например,	[2, 1, 1, 2, 3, 3, 2, 2, 2, 1] -> [2, 2, 2].
+			*/
+			function task3(){	
+				jsConsole.writeLine("TASK 3");	
+				document.getElementById('task3_str1').hidden = false;
+				document.getElementById('task3Ex').hidden = false;
+				document.getElementById('task3_txt1').hidden = false;
+			}
+			
+			function task3Ex(){
+				let elements = document.getElementById('task3_str1').value;
+				if (elements == "") {jsConsole.writeLine("Sequence is null"); document.getElementById("task3_str1").focus(); return;}
+				let a = elements.split(',');
+				jsConsole.writeLine("The input sequence is");
+				for (let i = 0; i < a.length; i++) {
+				  jsConsole.write(a[i]+" ");
+				}
+				jsConsole.writeLine("");
+				jsConsole.writeLine("");
+				
+				let longestItem = a[0];
+				let longestArray = new Array();
+				let longestCount = 0;
+				//longestArray.push(longestItem);	
+	
+				for (let i = 0; i < a.length; i++){
+					count = 1;
+					for (let j = i + 1; j <= a.length; j++){
+						//jsConsole.writeLine("j " + j);
+						///jsConsole.writeLine(a[i] + " " + a[j]);
+						if (a[i] == a[j]){ 
+							count++;
+						} else {
+							if (longestCount < count){
+								longestCount = count;
+								longestItem = a[i];						
+							}
+							j = a.length;
+							//jsConsole.writeLine("longestCount: " + longestCount+" longestItem: "+longestItem);
+						}
+						//jsConsole.writeLine("");
+					}
+				}
+			
+				for (i = 0; i <longestCount; i++){
+					longestArray.push(longestItem);
+				}
+	
+				jsConsole.writeLine("The maximum sequence is");
+				jsConsole.writeLine(longestArray);
+				
+				/*a.forEach(function(item, i, a) {
+					jsConsole.writeLine( i + ": " + item + " (массив:" + a + ")" );
+					
+				});*/				
+			}
+			
+			/*
+				TASK 4
+				Напишите скрипт, который находит максимальную возрастающую последовательность в массиве.
+				Например, 	[3, 2, 3, 4, 2, 2, 4] -> [2, 3, 4].
+			*/
+			function task4(){	
+				jsConsole.writeLine("TASK 4");	
+				document.getElementById('task4_str1').hidden = false;
+				document.getElementById('task4Ex').hidden = false;
+				document.getElementById('task4_txt1').hidden = false;
+			}
+			
+			function task4Ex(){
+				let elements = document.getElementById('task4_str1').value;
+				if (elements == "") {jsConsole.writeLine("Sequence is null"); document.getElementById("task4_str1").focus(); return;}
+				let a = elements.split(',');
+				jsConsole.writeLine("The input sequence is");
+				for (let i = 0; i < a.length; i++) {
+				  jsConsole.write(a[i]+" ");
+				}
+				jsConsole.writeLine("");
+				jsConsole.writeLine("");
+				
+				let item = a[0];
+				let longestArray = new Array();
+				let array = new Array();
+				let count = 1;
+				let longestCount = 0;
+				array.push(a[0]);
+				
+				//jsConsole.writeLine("length " + a.length);
+				
+				for (i = 1; i <= a.length; i++){
+					//jsConsole.writeLine("a[i-1]: " + a[i-1] + " a[i]: " + a[i] + " i: " + i);
+					if (a[i-1] < a[i]){
+						array.push(a[i]);
+						count++;
+					} else {
+						if (longestCount < count){
+							longestCount = count;
+							longestArray = array;
+							array = [];
+							array.push(a[i]);
+							count = 1;
+						}
+					}
+					//jsConsole.writeLine("longestCount: " + longestCount + " longestArray: " + longestArray + " array:" + array + " count: " + count);
+				}
+				jsConsole.writeLine("The maximum sequence is");
+				jsConsole.writeLine(longestArray);
+
+			}
+			
+			/*
+				TASK 5
+				Отсортировать массив – значит расположить его элементы в порядке возрастания. 
+				Напишите сценарий для сортировки массива. Используйте selection sort алгоритм: 
+					найти наименьший элемент, переместить его на первое место, 
+					найти наименьшее из остальных, переместите его на вторую позицию и т. д. 
+				Подсказка: Используйте второй массив
+			*/
+			function task5(){	
+				jsConsole.writeLine("TASK 5");	
+				document.getElementById('task5_str1').hidden = false;
+				document.getElementById('task5Ex').hidden = false;
+				document.getElementById('task5_txt1').hidden = false;
+			}
+			
+			function task5Ex(){
+				let elements = document.getElementById('task5_str1').value;
+				if (elements == "") {jsConsole.writeLine("Sequence is null"); document.getElementById("task5_str1").focus(); return;}
+				let a = elements.split(',');
+				jsConsole.writeLine("The input sequence is");
+				for (let i = 0; i < a.length; i++) {
+				  jsConsole.write(a[i]+" ");
+				}
+				jsConsole.writeLine("");
+				jsConsole.writeLine("");
+				
+				let sortArray = new Array();
+				let min, index, length;
+				length = a.length;		
+				
+				for (i = 0; i < length; i++){
+					min = Math.min.apply(Math,a);
+					index = a.indexOf(min.toString());
+					sortArray.push(min);
+					a.splice(index,1);
+					//jsConsole.writeLine("min = " + min + " index " + index);
+					jsConsole.writeLine("sortArray: " + sortArray + " a: " + a);					
+				}
+				jsConsole.writeLine("sortArray: " + sortArray);	
+			}
+			
+			/*
+				TASK 6
+				Напишите программу, которая найдет наиболее частое число в массиве.
+				Например, 	{4, 1, 1, 4, 2, 3, 4, 4, 1, 2, 4, 9, 3} -> 4 (5 раз)
+
+			*/
+			function task6(){	
+				jsConsole.writeLine("TASK 6");	
+				document.getElementById('task6_str1').hidden = false;
+				document.getElementById('task6Ex').hidden = false;
+				document.getElementById('task6_txt1').hidden = false;
+			}
+			
+			function task6Ex(){
+				let elements = document.getElementById('task6_str1').value;
+				if (elements == "") {jsConsole.writeLine("Sequence is null"); document.getElementById("task6_str1").focus(); return;}
+				let a = elements.split(',');
+				jsConsole.writeLine("The input sequence is");
+				for (let i = 0; i < a.length; i++) {
+				  jsConsole.write(a[i]+" ");
+				}
+				jsConsole.writeLine("");
+				jsConsole.writeLine("");
+				
+				let longestItem = a[0];
+				let longestArray = new Array();
+				let longestCount = 0;
+				//longestArray.push(longestItem);	
+	
+				for (let i = 0; i < a.length; i++){
+					count = 1;
+					for (let j = i + 1; j <= a.length; j++){
+						//jsConsole.writeLine("j " + j);
+						//jsConsole.writeLine(a[i] + " " + a[j]);
+						if (a[i] == a[j]){ 
+							count++;
+							//jsConsole.writeLine("count++" + count);
+						} 
+					}
+					if (longestCount < count){
+						longestCount = count;
+						longestItem = a[i];						
+					}
+					//jsConsole.writeLine("longestCount: " + longestCount+" longestItem: "+longestItem);
+				}
+	
+				jsConsole.writeLine("The maximum item is");
+				jsConsole.writeLine(longestItem + "("+longestCount+" times)");
+				
+				/*a.forEach(function(item, i, a) {
+					jsConsole.writeLine( i + ": " + item + " (массив:" + a + ")" );
+					4,1,1,4,2,3,4,4,1,2,4,9,3
+				});*/				
+			}
+		</script>
+		<!--Здесь располагается разметка-->
+		
+	</body>
+</html>
+

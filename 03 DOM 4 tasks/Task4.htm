@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <title>DOM: Task 4</title>
+    <style>
+        #child img,
+        #child img,
+        #child-2 img,
+        #child-3 img,
+        #child-4 img {
+            max-width: 50%;
+            border-radius: 50%;
+        }
+
+        #circle {
+            position: relative;
+            width: 300px;
+            margin: 0 auto;
+            height: 300px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            transform: rotate(0deg);
+            transition: transform 0.7s linear;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button onClick="createDivs()">Create Divs</button>
+        <button onClick="animateDivs()">Animate Divs</button>
+    </div>
+
+    <div id="container">
+        <div id="circle" style="transform: rotate(3480deg);">
+            <!--<div id="child-2" style="transform: rotate(-3480deg);"><img
+                    src="http://usefulangle.com/img/posts/32-es6.jpg"></div>-->
+        </div>
+    </div>
+
+    <!--<script>var _CURRENT_ANGLE = 0;
+        $("#animate-2").on('click', function () {
+            _CURRENT_ANGLE += 120;
+
+            $("#circle").css({ transform: 'rotate(' + _CURRENT_ANGLE + 'deg)' });
+            $("#child-2").css({ transform: 'rotate(-' + _CURRENT_ANGLE + 'deg)' });
+        });
+    </script>-->
+
+    <script type="text/javascript">
+        function createDivs() {
+            const COUNT = 5;
+            let div, img;
+            let staticDiv = document.getElementById('circle');
+
+            for (let index = 0; index < COUNT; index++) {
+                div = document.createElement('div');
+                div.setAttribute('id', `child-${index}`);
+                div.setAttribute('style', `transform: rotate(${index * 360 / COUNT}deg)`)
+
+                img = document.createElement('img');
+                img.setAttribute("src", "http://usefulangle.com/img/posts/32-es6.jpg");
+
+                staticDiv.append(div);
+                div.append(img);
+            }
+        }
+
+        function animateDivs() {
+            for (let elem of document.querySelectorAll('input[type="checkbox"]:checked')) {
+                elem.parentNode.parentNode.remove();
+            }
+        }
+    </script>
+</body>
+
+</html>
